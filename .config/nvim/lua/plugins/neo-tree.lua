@@ -8,6 +8,12 @@ return {
 	event = "VeryLazy",
 	keys = {
 		{ "<leader>e", ":Neotree toggle float<CR>", silent = true, desc = "Float File Explorer" },
+		{
+			"<leader>ef",
+			":Neotree reveal float<CR>",
+			silent = true,
+			desc = "Float File Explorer and reveal current file",
+		},
 		{ "<leader><tab>", ":Neotree toggle right<CR>", silent = true, desc = "Right File Explorer" },
 	},
 	config = function()
