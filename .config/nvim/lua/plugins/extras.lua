@@ -1,4 +1,61 @@
 return {
+	-- surround with motions (just update keymaps)
+	{
+		"echasnovski/mini.surround",
+		opts = {
+			mappings = {
+				add = "sa", -- Add surrounding in Normal and Visual modes
+				delete = "sd", -- Delete surrounding
+				find = "sf", -- Find surrounding (to the right)
+				find_left = "sF", -- Find surrounding (to the left)
+				highlight = "sh", -- Highlight surrounding
+				replace = "sr", -- Replace surrounding
+				update_n_lines = "sn", -- Update `n_lines`
+			},
+		},
+	},
+	-- flash search (just update keymaps)
+	{
+		"folke/flash.nvim",
+		keys = {
+			-- disable default search with s
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				false,
+			},
+			-- disable default treesitter search with S
+			{
+				"S",
+				mode = { "n", "o", "x" },
+				false,
+			},
+			-- disable <c-s> search
+			{
+				"<c-s>",
+				mode = { "c" },
+				false,
+			},
+			-- move default search to S
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			-- move treesitter search to <c-s>
+			{
+				"<C-s>",
+				mode = { "n", "o", "x" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+		},
+	},
 	-- floating filename
 	{
 		"b0o/incline.nvim",
