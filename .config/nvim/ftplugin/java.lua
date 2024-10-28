@@ -6,6 +6,8 @@ local workspace_dir = vim.env.HOME .. "/jdtls-workspace/" .. project_name
 -- Needed for debugging
 local bundles = {
 	vim.fn.glob(
+		-- Windows
+		--vim.env.HOME .. "/AppData/Local/nvim-data/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"
 		vim.env.HOME .. "/.local/share/nvim/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar"
 	),
 }
@@ -13,6 +15,8 @@ local bundles = {
 -- Needed for running/debugging unit tests
 vim.list_extend(
 	bundles,
+	-- Windows
+	-- vim.split(vim.fn.glob(vim.env.HOME .. "/AppData/Local/nvim-data/mason/share/java-test/*.jar", 1), "\n")
 	vim.split(vim.fn.glob(vim.env.HOME .. "/.local/share/nvim/mason/share/java-test/*.jar", 1), "\n")
 )
 
@@ -27,7 +31,12 @@ local config = {
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
 		"-Dlog.protocol=true",
 		"-Dlog.level=ALL",
-		"-javaagent:" .. vim.env.HOME .. "/.local/share/nvim/mason/share/jdtls/lombok.jar",
+
+		--  Windows
+		--  "/AppData/Local/nvim-data/mason/share/jdtls/lombok.jar",
+		"-javaagent:"
+			.. vim.env.HOME
+			.. "/.local/share/nvim/mason/share/jdtls/lombok.jar",
 		"-Xmx4g",
 		"--add-modules=ALL-SYSTEM",
 		"--add-opens",
@@ -37,9 +46,13 @@ local config = {
 
 		-- Eclipse jdtls location
 		"-jar",
+		-- Windows
+		-- vim.env.HOME .. "/AppData/Local/nvim-data/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar",
 		vim.env.HOME .. "/.local/share/nvim/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar",
 		-- TODO Update this to point to the correct jdtls subdirectory for your OS (config_linux, config_mac, config_win, etc)
 		"-configuration",
+		-- Windows
+		-- vim.env.HOME .. "/AppData/Local/nvim-data/mason/packages/jdtls/config_win",
 		vim.env.HOME .. "/.local/share/nvim/mason/packages/jdtls/config_mac",
 		"-data",
 		workspace_dir,
@@ -54,6 +67,8 @@ local config = {
 	settings = {
 		java = {
 			-- TODO Replace this with the absolute path to your main java version (JDK 17 or higher)
+			-- Windows
+			-- home = "/Programmi/Java/jdk-XX/",
 			home = "/Users/leo/.sdkman/candidates/java/21.0.4-tem",
 			eclipse = {
 				downloadSources = true,
