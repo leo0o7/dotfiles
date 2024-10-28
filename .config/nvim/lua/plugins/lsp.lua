@@ -7,9 +7,12 @@ return {
 				"luacheck",
 				"shellcheck",
 				"shfmt",
+				"jdtls",
 				"tailwindcss-language-server",
 				"typescript-language-server",
 				"css-lsp",
+				"java-debug-adapter",
+				"java-test",
 			})
 		end,
 	},
@@ -20,6 +23,20 @@ return {
 			inlay_hints = { enabled = false },
 			---@type lspconfig.options
 			servers = {
+				-- ltex = {
+				-- 	setup = function(config)
+				-- 		config.settings = {
+				-- 			ltex = {
+				-- 				language = "it",
+				-- 				additionalRules = {
+				-- 					languageModel = "~/models/ngrams/",
+				-- 				},
+				-- 			},
+				-- 		}
+				-- 	end,
+				-- },
+				bashls = { filetypes = { "sh", "zsh" } },
+				jdtls = {},
 				cssls = {},
 				tailwindcss = {
 					root_dir = function(...)
@@ -124,7 +141,11 @@ return {
 					},
 				},
 			},
-			setup = {},
+			setup = {
+				jdtls = function()
+					return true -- avoid duplicate servers
+				end,
+			},
 		},
 	},
 }
