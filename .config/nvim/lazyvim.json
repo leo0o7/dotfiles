@@ -1,10 +1,24 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.lang.markdown"
+    "lazyvim.plugins.extras.coding.mini-comment",
+    "lazyvim.plugins.extras.coding.yanky",
+    "lazyvim.plugins.extras.dap.core",
+    "lazyvim.plugins.extras.editor.dial",
+    "lazyvim.plugins.extras.editor.harpoon2",
+    "lazyvim.plugins.extras.editor.inc-rename",
+    "lazyvim.plugins.extras.lang.docker",
+    "lazyvim.plugins.extras.lang.git",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.rust",
+    "lazyvim.plugins.extras.lang.sql",
+    "lazyvim.plugins.extras.lang.toml",
+    "lazyvim.plugins.extras.lang.yaml",
+    "lazyvim.plugins.extras.ui.dashboard-nvim",
+    "lazyvim.plugins.extras.util.dot"
   ],
   "news": {
-    "NEWS.md": "6077",
-    "doc/news.txt": "24447"
+    "NEWS.md": "10960",
+    "doc/news.txt": "24450"
   },
-  "version": 6
+  "version": 7
 }

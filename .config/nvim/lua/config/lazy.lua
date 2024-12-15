@@ -17,7 +17,8 @@ require("lazy").setup({
 			"LazyVim/LazyVim",
 			import = "lazyvim.plugins",
 			opts = {
-				colorscheme = "solarized-osaka",
+				colorscheme = "catppuccin",
+				-- colorscheme = "solarized-osaka",
 				news = {
 					lazyvim = true,
 					neovim = true,
@@ -29,10 +30,10 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.lang.json" },
 		{ import = "lazyvim.plugins.extras.lang.tailwind" },
-		--	{ import = "lazyvim.plugins.extras.coding.codeium" },
+		-- { import = "lazyvim.plugins.extras.coding.codeium" },
 		{ import = "lazyvim.plugins.extras.coding.mini-surround" },
 		{ import = "lazyvim.plugins.extras.util.mini-hipatterns" },
-		{ import = "lazyvim.plugins.extras.dap.core" },
+		-- { import = "lazyvim.plugins.extras.dap.core" },
 		{ import = "plugins" },
 	},
 	defaults = {

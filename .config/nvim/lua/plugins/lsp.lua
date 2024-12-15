@@ -1,3 +1,4 @@
+require("lspconfig").clangd.setup({})
 return {
 	-- tools
 	{
@@ -10,6 +11,8 @@ return {
 				"jdtls",
 				"tailwindcss-language-server",
 				"typescript-language-server",
+				"rust-analyzer",
+				"codelldb",
 				"css-lsp",
 				"java-debug-adapter",
 				"java-test",
@@ -142,6 +145,9 @@ return {
 				},
 			},
 			setup = {
+				rust_analyzer = function()
+					return true -- use rustaceanvim
+				end,
 				jdtls = function()
 					return true -- avoid duplicate servers
 				end,

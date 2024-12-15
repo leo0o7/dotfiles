@@ -1,5 +1,5 @@
 return {
-	-- surround with motions (just update keymaps)
+	-- surround with motions (updated keymaps)
 	{
 		"echasnovski/mini.surround",
 		opts = {
@@ -14,7 +14,7 @@ return {
 			},
 		},
 	},
-	-- flash search (just update keymaps)
+	-- flash search (updated keymaps)
 	{
 		"folke/flash.nvim",
 		keys = {
@@ -86,21 +86,6 @@ return {
 			})
 		end,
 	},
-	-- lazygit ui
-	{
-		"kdheepak/lazygit.nvim",
-		keys = {
-			{
-				";c",
-				":LazyGit<Return>",
-				silent = true,
-				noremap = true,
-			},
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-	},
 	-- dashboard
 	{
 		"nvimdev/dashboard-nvim",
@@ -108,7 +93,8 @@ return {
 		opts = function()
 			local ascii = require("ascii")
 
-			local logo = table.concat(ascii.get_random_global(), "\n")
+			-- local logo = table.concat(ascii.get_random_global(), "\n")
+			local logo = table.concat(ascii.art.planets.planets["saturn_plus"], "\n")
 			logo = string.rep("\n", 8) .. logo .. string.rep("\n", 2)
 
 			local opts = {
