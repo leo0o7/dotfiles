@@ -1,4 +1,5 @@
 require("lspconfig").clangd.setup({})
+-- require("lspconfig").pyright.setup({})
 return {
 	-- tools
 	{
@@ -26,18 +27,6 @@ return {
 			inlay_hints = { enabled = false },
 			---@type lspconfig.options
 			servers = {
-				-- ltex = {
-				-- 	setup = function(config)
-				-- 		config.settings = {
-				-- 			ltex = {
-				-- 				language = "it",
-				-- 				additionalRules = {
-				-- 					languageModel = "~/models/ngrams/",
-				-- 				},
-				-- 			},
-				-- 		}
-				-- 	end,
-				-- },
 				bashls = { filetypes = { "sh", "zsh" } },
 				jdtls = {},
 				cssls = {},

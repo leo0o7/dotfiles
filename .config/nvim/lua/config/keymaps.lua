@@ -36,6 +36,9 @@ end)
 -- Go to definition on new tab
 keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.definition()<cr>")
 
+keymap.set("n", "nx", "<cmd>Trouble diagnostics next<cr>")
+keymap.set("n", "Nx", "<cmd>Trouble diagnostics next<cr>")
+
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
 

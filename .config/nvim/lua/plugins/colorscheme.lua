@@ -6,6 +6,7 @@ return {
 		opts = {
 			transparent_background = true,
 			integrations = {
+				blink_cmp = true,
 				aerial = true,
 				alpha = true,
 				cmp = true,
