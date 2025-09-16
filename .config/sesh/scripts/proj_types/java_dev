@@ -1,0 +1,8 @@
+#!/bin/bash
+tmux new-window -n "run"
+tmux split-window -h
+tmux select-pane -t :.+
+# don't run yet
+tmux send-keys "mvn-run"
+tmux select-window -t 1
+nvim

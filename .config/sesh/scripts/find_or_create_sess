@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# configure project types
+declare -A proj_to_sess_script=(
+  [java]="$HOME/.config/sesh/scripts/proj_types/java_dev"
+  [nextjs]="$HOME/.config/sesh/scripts/proj_types/node_dev"
+)
+declare -A proj_to_init_script=(
+  [java]="mvn-init"
+  [nextjs]="npx create-next-app@latest"
+)
+declare -A other_folders_for_type=(
+  # can expand this later...
+  [$HOME/projects/school/java]=java
+  [$HOME/projects/nextjs/old]=nextjs
+)
+
+proj_type=$(basename "$(pwd)")
+
+# not a project home folder
+if [ -z "${proj_to_sess_script[$proj_type]}" ]; then
+  # not a special project home folder
+  [ -z "${other_folders_for_type[$(pwd)]}" ] && exit
+
+  proj_type="${other_folders_for_type[$(pwd)]}"
+fi
+
+FZF_RES=$(
+  find . -type d -mindepth 1 -maxdepth 1 -exec basename {} \; | fzf --tmux \
+    --prompt "Select a directory or press Ctrl-N to create a new project: " \
+    --expect=ctrl-n
+)
+
+keymap=$(echo "$FZF_RES" | head -n 1)
+dir=$(echo "$FZF_RES" | tail -n 1)
+
+if echo "$keymap" | grep -q "ctrl-n"; then
+  new_project=$(echo -e "\n" | fzf --tmux --prompt="Enter new project name: " --print-query)
+  [ -z "$new_project" ] && exit
+
+  eval "${proj_to_init_script[$proj_type]}" "$new_project"
+  dir=$new_project
+fi
+
+[ -z "$dir" ] && tmux kill-session && exit
+
+cd "$dir" || exit
+
+current_session="$(tmux display-message -p '#S')"
+
+if tmux has-session -t "$dir" 2>/dev/null; then
+  tmux switch-client -t "$dir"
+  tmux kill-session -t "$current_session"
+else
+  tmux rename-session -t "$current_session" "$dir"
+  "${proj_to_sess_script[$proj_type]}"
+fi
