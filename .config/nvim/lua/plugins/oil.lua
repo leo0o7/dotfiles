@@ -1,16 +1,22 @@
 return {
-	"stevearc/oil.nvim",
-	keys = {
-		{ "<leader>e", "<cmd>Oil --float<CR>", desc = "Explorer" },
-	},
-	opts = {
-		view_options = {
-			show_hidden = true,
+	{
+		"stevearc/oil.nvim",
+		keys = {
+			{ "<leader>e", "<cmd>Oil --float<CR>", desc = "Explorer" },
 		},
-		float = {
-			padding = 5,
+		opts = {
+			view_options = {
+				show_hidden = true,
+			},
+			float = {
+				padding = 5,
+			},
 		},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
-	-- Optional dependencies
-	dependencies = { "nvim-tree/nvim-web-devicons" },
+	{
+		"benomahony/oil-git.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+	},
 }
