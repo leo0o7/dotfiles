@@ -105,33 +105,19 @@ local function animate_detail(detail)
 end
 
 media_cover:subscribe("media_update", function(env)
-	-- DEBUG
-	sbar.exec(
-		"echo '[lua] state="
-			.. (env.state or "nil")
-			.. " title="
-			.. (env.title or "nil")
-			.. " artwork="
-			.. (env.artwork or "nil")
-			.. "' >> /tmp/sketchybar_media.log"
-	)
-
 	if not whitelist[env.bundle] then
 		return
 	end
 
 	local playing = (env.state == "playing")
-	local has_title = env.title and env.title ~= ""
 	local has_artwork = env.artwork and env.artwork ~= ""
 
-	if has_title then
+	if playing then
 		media_artist:set({ label = truncate(env.artist, 18) })
 		media_title:set({ label = truncate(env.title, 16) })
 	end
 
 	if playing and has_artwork then
-		-- clear image string first to bust sketchybar's internal cache
-		media_cover:set({ background = { image = { string = "" } } })
 		media_cover:set({
 			drawing = true,
 			background = { image = { string = env.artwork, scale = 1.0 } },
@@ -142,27 +128,23 @@ media_cover:subscribe("media_update", function(env)
 		animate_detail(true)
 		interrupt = interrupt + 1
 		sbar.delay(5, animate_detail)
-	elseif not playing and not has_title then
-		-- only fully hide when truly nothing is playing (not mid-transition)
+	elseif not playing and (not env.title or env.title == "") then
 		media_artist:set({ drawing = false })
 		media_title:set({ drawing = false })
 		media_cover:set({ drawing = false, popup = { drawing = false } })
 	end
 end)
 
-media_cover:subscribe("mouse.entered", function(env)
+media_cover:subscribe("mouse.entered", function()
 	interrupt = interrupt + 1
 	animate_detail(true)
 end)
-
-media_cover:subscribe("mouse.exited", function(env)
+media_cover:subscribe("mouse.exited", function()
 	animate_detail(false)
 end)
-
-media_cover:subscribe("mouse.clicked", function(env)
+media_cover:subscribe("mouse.clicked", function()
 	media_cover:set({ popup = { drawing = "toggle" } })
 end)
-
-media_title:subscribe("mouse.exited.global", function(env)
+media_title:subscribe("mouse.exited.global", function()
 	media_cover:set({ popup = { drawing = false } })
 end)
