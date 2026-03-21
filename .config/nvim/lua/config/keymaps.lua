@@ -33,6 +33,9 @@ vim.keymap.set("v", "g-", function()
 	require("dial.map").manipulate("decrement", "gvisual")
 end)
 
+keymap.set("n", "<leader>j", "o<ESC>", opts)
+keymap.set("n", "<leader>k", "O<ESC>", opts)
+
 -- Go to definition on new tab
 keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.definition()<cr>")
 

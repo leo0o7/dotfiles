@@ -1,6 +1,26 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
 	opts = {
+		html = {
+			-- Turn on / off all HTML rendering.
+			enabled = true,
+			-- Additional modes to render HTML.
+			render_modes = false,
+			comment = {
+				-- Turn on / off HTML comment concealing.
+				conceal = true,
+				-- Optional text to inline before the concealed comment.
+				text = nil,
+				-- Highlight for the inlined text.
+				highlight = "RenderMarkdownHtmlComment",
+			},
+			-- HTML tags whose start and end will be hidden and icon shown.
+			-- The key is matched against the tag name, value type below.
+			-- | icon            | optional icon inlined at start of tag           |
+			-- | highlight       | optional highlight for the icon                 |
+			-- | scope_highlight | optional highlight for item associated with tag |
+			tag = {},
+		},
 		-- Whether Markdown should be rendered by default or not
 		enabled = true,
 		-- Maximum file size (in MB) that this plugin will attempt to render
@@ -56,7 +76,7 @@ return {
 			-- Whether LaTeX should be rendered, mainly used for health check
 			enabled = true,
 			-- Executable used to convert latex formula to rendered unicode
-			converter = "latex2text",
+			converter = "utftex",
 			-- Highlight for LaTeX blocks
 			highlight = "RenderMarkdownMath",
 			-- Amount of empty lines above LaTeX blocks
@@ -219,7 +239,12 @@ return {
 			-- Determines how icons fill the available space:
 			--  inline:  underlying text is concealed resulting in a left aligned icon
 			--  overlay: result is left padded with spaces to hide any additional text
-			position = "inline",
+			-- position = "inline",
+
+			render_modes = false,
+			bullet = true,
+			right_pad = 1,
+
 			unchecked = {
 				-- Replaces '[ ]' of 'task_list_marker_unchecked'
 				icon = "󰄱 ",
