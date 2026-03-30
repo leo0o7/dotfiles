@@ -33,3 +33,6 @@ vim.opt.mouse = ""
 --
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
+
+-- LSP Server to use for PHP.
+vim.g.lazyvim_php_lsp = "intelephense"
