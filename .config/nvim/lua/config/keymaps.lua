@@ -62,3 +62,25 @@ keymap.set("n", "<leader>oc", ":ObsidianRepeatMoveToActiveFile<CR>", opts)
 keymap.set("n", "<leader>oo", ":ObsidianRepeatOpen<CR>", opts)
 keymap.set("n", "<leader>ol", ":ObsidianRepeatLink<CR>", opts)
 keymap.set("n", "<leader>of", ":ObsidianRepeatLinkFolders<CR>", opts)
+
+-- Command typo corrections
+local abbrevs = {
+	-- :W variants
+	{ "W", "w" },
+	{ "WQ", "wq" },
+	{ "Wq", "wq" },
+	{ "WA", "wa" },
+	{ "Wa", "wa" },
+	{ "WQA", "wqa" },
+	{ "WQa", "wqa" },
+	{ "Wqa", "wqa" },
+	-- :Q variants
+	{ "Q", "q" },
+	{ "QA", "qa" },
+	{ "Qa", "qa" },
+	{ "Q!", "q!" },
+}
+
+for _, abbrev in ipairs(abbrevs) do
+	vim.cmd(string.format("cnoreabbrev %s %s", abbrev[1], abbrev[2]))
+end
