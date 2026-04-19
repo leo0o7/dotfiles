@@ -30,9 +30,14 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
 vim.opt.mouse = ""
---
+
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
 
 -- LSP Server to use for PHP.
 vim.g.lazyvim_php_lsp = "intelephense"
+
+-- Folds
+vim.opt.foldopen = "search"
+vim.opt.foldlevelstart = 99
+vim.opt.foldcolumn = "1"
