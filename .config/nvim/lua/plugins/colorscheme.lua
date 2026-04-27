@@ -6,8 +6,15 @@ return {
 			require("rose-pine").setup({
 				variant = "moon",
 				dark_variant = "moon",
-				styles = {
-					transparency = false,
+				highlight_groups = {
+					SpellBad = { undercurl = true, sp = "#ff5d6c" },
+					SpellCap = { undercurl = true, sp = "#f6c177" },
+					SpellLocal = { undercurl = true, sp = "#9ccfd8" },
+					SpellRare = { undercurl = true, sp = "#c4a7e7" },
+					DiagnosticUnderlineError = { undercurl = true, sp = "#ff5d6c" },
+					DiagnosticUnderlineWarn = { undercurl = true, sp = "#f6c177" },
+					DiagnosticUnderlineInfo = { undercurl = true, sp = "#9ccfd8" },
+					DiagnosticUnderlineHint = { undercurl = true, sp = "#c4a7e7" },
 				},
 			})
 		end,
