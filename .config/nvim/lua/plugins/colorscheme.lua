@@ -1,5 +1,18 @@
 return {
 	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			require("rose-pine").setup({
+				variant = "moon",
+				dark_variant = "moon",
+				styles = {
+					transparency = false,
+				},
+			})
+		end,
+	},
+	{
 		"catppuccin/nvim",
 		lazy = true,
 		name = "catppuccin",
@@ -18,10 +31,6 @@ return {
 		"danfry1/lume",
 		lazy = false,
 		priority = 1000,
-		-- config = function()
-		-- 	require("lume").setup()
-		-- 	vim.cmd("colorscheme lume")
-		-- end,
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
@@ -29,19 +38,6 @@ return {
 		config = true,
 		opts = function()
 			return { transparent_mode = true }
-		end,
-	},
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		config = function()
-			require("rose-pine").setup({
-				variant = "moon",
-				dark_variant = "moon",
-				styles = {
-					transparency = false,
-				},
-			})
 		end,
 	},
 	{
