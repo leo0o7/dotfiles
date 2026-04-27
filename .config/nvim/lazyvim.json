@@ -20,6 +20,7 @@
     "lazyvim.plugins.extras.lang.typst",
     "lazyvim.plugins.extras.lang.yaml",
     "lazyvim.plugins.extras.ui.dashboard-nvim",
+    "lazyvim.plugins.extras.ui.smear-cursor",
     "lazyvim.plugins.extras.util.dot"
   ],
   "install_version": 7,
