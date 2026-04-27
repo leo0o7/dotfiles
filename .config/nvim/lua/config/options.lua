@@ -14,6 +14,7 @@ vim.opt.smartindent = true
 vim.opt.hlsearch = true
 vim.opt.backup = false
 vim.opt.showcmd = true
+vim.opt.cmdheight = 0
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.inccommand = "split"
