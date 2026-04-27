@@ -7,6 +7,7 @@ vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
 vim.opt.number = true
+vim.opt.list = false
 
 vim.opt.title = true
 vim.opt.autoindent = true

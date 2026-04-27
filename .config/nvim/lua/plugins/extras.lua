@@ -1,4 +1,13 @@
 return {
+	-- keep indent guides available via <leader>ug, but off on startup
+	{
+		"folke/snacks.nvim",
+		opts = {
+			indent = {
+				enabled = false,
+			},
+		},
+	},
 	-- surround with motions (updated keymaps)
 	{
 		"nvim-mini/mini.surround",
