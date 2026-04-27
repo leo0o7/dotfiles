@@ -16,7 +16,7 @@ return {
 				-- avoid double rendering in tmux
 				-- (image stays render in different nvim windows)
 				tmux_show_only_in_active_window = true,
-				-- toggles images when windows are overlapped-- toggles images when windows are overlapped
+				-- toggles images when windows are overlapped
 				window_overlap_clear_enable = true,
 				integrations = {
 					markdown = {

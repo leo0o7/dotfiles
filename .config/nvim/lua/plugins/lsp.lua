@@ -1,9 +1,9 @@
-require("lspconfig").clangd.setup({})
 return {
 	-- tools
 	{
 		"mason-org/mason.nvim",
 		opts = function(_, opts)
+			opts.ensure_installed = opts.ensure_installed or {}
 			vim.list_extend(opts.ensure_installed, {
 				"luacheck",
 				"shellcheck",
@@ -27,6 +27,7 @@ return {
 			---@type lspconfig.options
 			servers = {
 				bashls = { filetypes = { "sh", "zsh" } },
+				clangd = {},
 				jdtls = {},
 				cssls = {},
 				tinymist = {
@@ -61,7 +62,7 @@ return {
 						return require("lspconfig.util").root_pattern(".git")(...)
 					end,
 				},
-				tsserver = {
+				ts_ls = {
 					root_dir = function(...)
 						return require("lspconfig.util").root_pattern(".git")(...)
 					end,

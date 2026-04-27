@@ -36,8 +36,8 @@ return {
 		name = "rose-pine",
 		config = function()
 			require("rose-pine").setup({
-				variant = "auto",
-				dark_variant = "main",
+				variant = "moon",
+				dark_variant = "moon",
 				styles = {
 					transparency = false,
 				},

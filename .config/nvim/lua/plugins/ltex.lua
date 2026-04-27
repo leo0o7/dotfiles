@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("User", {
 		local name = vim.fn.expand("%:t:r")
 		local pdf_out = "/tmp/latexbuild/" .. name .. ".pdf"
 		local dest = src_dir .. "/" .. name .. ".pdf"
-		vim.fn.system(string.format("cp '%s' '%s'", pdf_out, dest))
+		vim.fn.system({ "cp", pdf_out, dest })
 	end,
 })
 vim.g.vimtex_view_method = "sioyek"

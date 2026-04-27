@@ -2,7 +2,7 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 -- remove save keymap
-keymap.del("n", "<C-s>")
+pcall(keymap.del, "n", "<C-s>")
 
 keymap.set("n", "x", '"_x')
 -- Increment/decrement (NOW USING DIAL)
@@ -38,9 +38,6 @@ keymap.set("n", "<leader>k", "O<ESC>", opts)
 
 -- Go to definition on new tab
 keymap.set("n", "gt", "<cmd>tab split | lua vim.lsp.buf.definition()<cr>")
-
-keymap.set("n", "nx", "<cmd>Trouble diagnostics next<cr>")
-keymap.set("n", "Nx", "<cmd>Trouble diagnostics next<cr>")
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G")
