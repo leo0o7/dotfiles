@@ -1,22 +1,44 @@
 return {
 	{
-		"stevearc/oil.nvim",
+		"barrettruth/canola.nvim",
+		branch = "canola",
+		lazy = false,
+
+		init = function()
+			vim.g.canola = {
+				columns = {
+					"git_status",
+					"icon",
+					-- "permissions",
+					-- "size",
+					-- "mtime",
+				},
+				extglob = true,
+				view_options = {
+					show_hidden = true,
+				},
+				float = {
+					padding = 5,
+				},
+			}
+		end,
 		keys = {
-			{ "<leader>e", "<cmd>Oil --float<CR>", desc = "Explorer" },
+			{ "<leader>e", "<cmd>Canola --float<CR>", desc = "Explorer" },
 		},
-		opts = {
-			view_options = {
-				show_hidden = true,
-			},
-			float = {
-				padding = 5,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			{
+				"barrettruth/canola-collection",
+				init = function()
+					vim.g.canola_git = {
+						show = {
+							untracked = true,
+							ignored = false,
+						},
+						format = "symbol", -- "compact" | "symbol" | "porcelain"
+					}
+				end,
 			},
 		},
-		-- Optional dependencies
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
-	{
-		"benomahony/oil-git.nvim",
-		dependencies = { "stevearc/oil.nvim" },
 	},
 }
