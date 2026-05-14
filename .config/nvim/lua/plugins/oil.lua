@@ -20,6 +20,9 @@ return {
 				float = {
 					padding = 5,
 				},
+				delete = {
+					recursive = true,
+				},
 			}
 		end,
 		keys = {
