@@ -38,7 +38,13 @@ return {
 			-- adding any nvim-cmp sources here will enable them
 			-- with blink.compat
 			compat = {},
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lsp", "path", "snippets", "buffer", "filemention" },
+			providers = {
+				filemention = {
+					name = "filemention",
+					module = "filemention.sources.blink",
+				},
+			},
 		},
 
 		cmdline = {
