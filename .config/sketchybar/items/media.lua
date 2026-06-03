@@ -90,6 +90,40 @@ sbar.add("item", {
 })
 
 local interrupt = 0
+local hide_generation = 0
+local hide_pending = false
+
+local function hide_media()
+	media_artist:set({ drawing = false, label = { string = "" } })
+	media_title:set({ drawing = false, label = { string = "" } })
+	media_cover:set({
+		drawing = false,
+		background = { image = { string = "" } },
+		popup = { drawing = false },
+	})
+end
+
+local function schedule_hide()
+	if hide_pending then
+		return
+	end
+
+	hide_pending = true
+	hide_generation = hide_generation + 1
+	local generation = hide_generation
+
+	sbar.delay(60, function()
+		if hide_pending and generation == hide_generation then
+			hide_pending = false
+			hide_media()
+		end
+	end)
+end
+
+local function cancel_hide()
+	hide_pending = false
+	hide_generation = hide_generation + 1
+end
 
 local function animate_detail(detail)
 	if not detail then
@@ -105,19 +139,30 @@ local function animate_detail(detail)
 end
 
 media_cover:subscribe("media_update", function(env)
-	if not whitelist[env.bundle] then
+	local playing = (env.state == "playing")
+	local has_artwork = env.artwork and env.artwork ~= ""
+	local has_title = env.title and env.title ~= ""
+	local has_bundle = env.bundle and env.bundle ~= ""
+
+	if not playing then
+		if not has_title or not has_bundle or whitelist[env.bundle] then
+			schedule_hide()
+		end
 		return
 	end
 
-	local playing = (env.state == "playing")
-	local has_artwork = env.artwork and env.artwork ~= ""
+	cancel_hide()
 
-	if playing then
-		media_artist:set({ label = truncate(env.artist, 18) })
-		media_title:set({ label = truncate(env.title, 16) })
+	-- only show for whitelisted apps
+	if not whitelist[env.bundle] then
+		hide_media()
+		return
 	end
 
-	if playing and has_artwork then
+	media_artist:set({ label = truncate(env.artist, 18) })
+	media_title:set({ label = truncate(env.title, 16) })
+
+	if has_artwork then
 		media_cover:set({
 			drawing = true,
 			background = { image = { string = env.artwork, scale = 1.0 } },
@@ -128,13 +173,8 @@ media_cover:subscribe("media_update", function(env)
 		animate_detail(true)
 		interrupt = interrupt + 1
 		sbar.delay(5, animate_detail)
-	elseif not playing and (not env.title or env.title == "") then
-		media_artist:set({ drawing = false })
-		media_title:set({ drawing = false })
-		media_cover:set({ drawing = false, popup = { drawing = false } })
 	end
 end)
-
 media_cover:subscribe("mouse.entered", function()
 	interrupt = interrupt + 1
 	animate_detail(true)
