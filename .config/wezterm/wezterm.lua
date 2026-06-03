@@ -53,7 +53,7 @@ config = {
 
 	-- for tilde and other macos composed keys
 	send_composed_key_when_left_alt_is_pressed = true,
-	-- for shortcuts using alt
+	-- for shortcuts using right alt
 	send_composed_key_when_right_alt_is_pressed = false,
 
 	-- color_scheme = "Catppuccin Mocha",
