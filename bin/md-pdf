@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -e
+
+TEMPLATE="/Users/leo/.local/share/pandoc/template/eisvogel.latex"
+
+usage() {
+  echo "Usage:"
+  echo "  md2pdf input.md"
+  echo "  md2pdf input.md output"
+  echo
+  echo "Examples:"
+  echo "  md2pdf file.md           -> file.pdf"
+  echo "  md2pdf file.md out.pdf   -> out.pdf"
+  echo "  md2pdf file.md out       -> out"
+}
+
+if [[ "$1" == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+if [[ "$#" -lt 1 || "$#" -gt 2 ]]; then
+  usage
+  exit 1
+fi
+
+INPUT="$1"
+
+if [[ "$INPUT" != *.md ]]; then
+  echo "Error: input must be a .md file"
+  exit 1
+fi
+
+if [[ "$#" -eq 1 ]]; then
+  OUTPUT="${INPUT%.md}.pdf"
+else
+  OUTPUT="$2"
+fi
+
+if [[ -e "$OUTPUT" ]]; then
+  read -r -p "File '$OUTPUT' exists. Overwrite? [y/N] " ans
+  case "$ans" in
+  [yY]) ;;
+  *)
+    echo "Aborted."
+    exit 1
+    ;;
+  esac
+fi
+
+pandoc "$INPUT" \
+  -o "$OUTPUT" \
+  --from markdown \
+  --template="$TEMPLATE" \
+  --listings \
+  --pdf-engine=xelatex

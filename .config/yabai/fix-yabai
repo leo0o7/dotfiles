@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Updating sudoers hash for yabai..."
+echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 "$(which yabai)" | cut -d ' ' -f 1) $(which yabai) --load-sa" |
+  sudo tee /private/etc/sudoers.d/yabai >/dev/null
+
+echo "Restarting yabai service..."
+yabai --stop-service 2>/dev/null || true
+yabai --start-service
+
+echo "Loading scripting addition..."
+sudo yabai --load-sa
+
+echo "Restarting Dock..."
+killall Dock 2>/dev/null || true
+
+echo "Done."

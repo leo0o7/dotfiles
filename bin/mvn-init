@@ -1,0 +1,36 @@
+#!/bin/bash
+MAVEN_GITIGNORE="
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath"
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <app_name>"
+  exit 1
+fi
+
+app_name="$1"
+
+mvn archetype:generate -DgroupId=com.leo -DartifactId="$app_name" -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.5 -DinteractiveMode=false
+
+mkdir -p "$app_name"/src/main/java/com/leo/"$app_name"
+
+touch "$app_name"/.gitignore
+echo "$MAVEN_GITIGNORE" >"$app_name/.gitignore"
+
+cd "$app_name" || exit
+
+echo "Maven project '$app_name' created successfully."

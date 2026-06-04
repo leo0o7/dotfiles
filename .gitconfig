@@ -1,0 +1,21 @@
+[core]
+	sshCommand = ssh -i ~/.ssh/id_ed25519
+	pager = delta
+[user]
+	name = leo0o7
+	email = giardinoleonardo34@gmail.com
+
+; delta themes
+[include]
+    path = ~/.config/delta/themes.gitconfig
+
+[delta]
+	features = mellow-barbet
+	light = false
+	tabs = 2
+	line-numbers = true
+	navigate = true
+	hyperlinks = true
+	; side-by-side = true
+
+

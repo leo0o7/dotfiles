@@ -1,0 +1,64 @@
+#!/usr/bin/env zsh
+
+set -u
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  print -u2 -- "gaddf: not inside a Git repository"
+  exit 1
+fi
+
+if [[ -z "$(git status --porcelain=v1 --untracked-files=all)" ]]; then
+  print -- "gaddf: nothing to add"
+  exit 0
+fi
+
+git status --porcelain=v1 -z --untracked-files=all |
+  perl -0ne '
+    chomp;
+    next unless length $_;
+
+    my $git_status = substr($_, 0, 2);
+    my $file_path = substr($_, 3);
+    my $old_file_path = "";
+
+    if ($git_status =~ /[RC]/) {
+      $old_file_path = <STDIN>;
+      chomp $old_file_path if defined $old_file_path;
+    }
+
+    print "$git_status\t$file_path\t$old_file_path\0";
+  ' |
+  fzf \
+    --read0 \
+    --print0 \
+    --multi \
+    --prompt='git add> ' \
+    --delimiter=$'\t' \
+    --with-nth=1,2 \
+    --bind='ctrl-a:select-all,ctrl-d:deselect-all' \
+    --preview '
+      zsh -c '"'"'
+        git_status="$1"
+        file_path="$2"
+        old_file_path="$3"
+
+        if [[ -n "$old_file_path" ]]; then
+          print -r -- "$old_file_path -> $file_path"
+          print
+        fi
+
+        if [[ -d "$file_path" ]]; then
+          fd --type f . "$file_path" | sed -n "1,200p"
+        elif git ls-files --error-unmatch -- "$file_path" >/dev/null 2>&1; then
+          git diff --color=always -- "$file_path"
+          git diff --cached --color=always -- "$file_path"
+        else
+          bat --color=always --style=numbers --line-range=:200 -- "$file_path" 2>/dev/null ||
+            sed -n "1,200p" -- "$file_path" 2>/dev/null
+        fi
+      '"'"' zsh {1} {2} {3}
+    ' |
+  while IFS=$'\t' read -r -d $'\0' git_status file_path old_file_path; do
+    git add -- "$file_path"
+    print -r -- "added $file_path"
+  done

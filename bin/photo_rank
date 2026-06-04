@@ -1,0 +1,61 @@
+#!/bin/bash
+# photo_rank.sh — rank folders by number of photo files
+# Usage:
+#   ./photo_rank.sh [ -n TOP ] [DIR]
+# Examples:
+#   ./photo_rank.sh .            # full ranking
+#   ./photo_rank.sh -n 20 ~/Pics # top 20
+
+set -o pipefail
+
+TOP=""
+while getopts ":n:" opt; do
+  case $opt in
+  n) TOP="$OPTARG" ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+TARGET_DIR="${1:-.}"
+
+# Common photo/RAW extensions (extend if you like)
+EXTS="jpg jpeg png gif heic tiff tif webp bmp dng cr2 nef arw orf rw2 raf srw pef 3fr"
+# EXTS="pdf doc docx xls xlsx ppt pptx txt rtf odt ods odp"
+
+run_fd() {
+  # fd: case-insensitive (-i), files only (-t f), NUL-separated (-0)
+  cmd=(fd -i -t f -0)
+  for e in $EXTS; do cmd+=(-e "$e"); done
+  cmd+=(-- "$TARGET_DIR")
+  "${cmd[@]}"
+}
+
+run_find() {
+  # BSD find with case-insensitive -iname and -print0 for NUL separation
+  find "$TARGET_DIR" -type f \( \
+    -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o \
+    -iname '*.heic' -o -iname '*.tiff' -o -iname '*.tif' -o -iname '*.webp' -o \
+    -iname '*.bmp' -o -iname '*.dng' -o -iname '*.cr2' -o -iname '*.nef' -o \
+    -iname '*.arw' -o -iname '*.orf' -o -iname '*.rw2' -o -iname '*.raf' -o \
+    -iname '*.srw' -o -iname '*.pef' -o -iname '*.3fr' \
+    \) -print0
+}
+
+if command -v fd >/dev/null 2>&1; then
+  SRC_CMD=run_fd
+else
+  SRC_CMD=run_find
+fi
+
+# Pipeline:
+#   1) list matching files (NUL-delimited)
+#   2) map each file → its directory with dirname (safe for spaces)
+#   3) sort, count per directory, sort numeric desc
+#   4) pretty print as "COUNT<TAB>DIRECTORY"
+"$SRC_CMD" |
+  xargs -0 -I{} dirname "{}" |
+  LC_ALL=C sort |
+  uniq -c |
+  LC_ALL=C sort -nr |
+  awk '{c=$1;$1="";sub(/^ +/,"");print c "\t" $0}' |
+  { if [ -n "$TOP" ]; then head -n "$TOP"; else cat; fi; }

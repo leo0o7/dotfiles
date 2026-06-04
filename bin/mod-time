@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 [filename]"
+  exit 1
+fi
+
+file="$1"
+
+# Get creation time (%w). If not available, exit.
+ctime=$(gstat -c %w "$file")
+if [ "$ctime" = "-" ]; then
+  echo "Creation time not available for $file"
+  exit 2
+fi
+#
+# Strip nanoseconds and timezone for touch
+ctime_clean=$(echo "$ctime" | awk '{print $1 " " $2}')
+
+# Update modification time
+touch -m -d "$ctime_clean" "$file"
+echo "Modification time of '$file' set to creation time: $ctime_clean"

@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ $EUID -ne 0 ]]; then
+  exec sudo "$0" "$@"
+fi
+
+LOADER="/Library/ScriptingAdditions/yabai.osax/Contents/MacOS/loader"
+
+if [[ ! -f "$LOADER" ]]; then
+  echo "Error: loader not found at:"
+  echo "$LOADER"
+  echo
+  echo "Try running first:"
+  echo "  sudo yabai --load-sa"
+  exit 1
+fi
+
+read -r I O <<<"$(
+  otool -f "$LOADER" |
+    awk '
+      /architecture/ { i=$2 }
+      /capabilities 0x81/ { f=1 }
+      f && /offset/ { print i, $2; exit }
+    '
+)"
+
+if [[ -z "${O:-}" ]]; then
+  echo "No target architecture with capabilities 0x81 found."
+  echo "Current loader state:"
+  otool -f "$LOADER"
+  exit 0
+fi
+
+echo "Patching $LOADER"
+echo "Architecture: $I"
+echo "Offset: $O"
+
+printf '\x80' | dd of="$LOADER" bs=1 seek=$((8 + I * 20 + 4)) count=1 conv=notrunc
+printf '\x80' | dd of="$LOADER" bs=1 seek=$((O + 11)) count=1 conv=notrunc
+
+echo "Re-signing loader..."
+codesign -f -s - "$LOADER"
+
+echo
+echo "Patch complete. New state:"
+otool -f "$LOADER"

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+default=0
+class=""
+
+for arg in "$@"; do
+  if [ "$arg" == "--default" ]; then
+    default=1
+    outDir="./modules"
+    inDir="./src"
+    moduleName="main"
+  elif [ "$arg" == "--class" ]; then
+    shift
+    class="$1"
+  fi
+  shift
+done
+
+if [ $default -eq 0 ]; then
+  read -p "Enter compile path (default: ./modules): " outDir
+  outDir=${outDir:-./modules}
+  read -p "Enter source path (default: ./src): " inDir
+  inDir=${inDir:-./src}
+  read -p "Enter module name (default: main): " moduleName
+  moduleName=${moduleName:-main}
+fi
+
+if [ -z $class ]; then
+  read -p "Enter class to execute (packageDir.Class): " class
+fi
+
+echo javac -d $outDir --module-source-path $inDir --module $moduleName -verbose
+javac -d $outDir --module-source-path $inDir --module $moduleName -verbose
+echo
+echo
+java --module-path ./modules/ --module main/$class

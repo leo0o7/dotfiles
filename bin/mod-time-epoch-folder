@@ -1,0 +1,48 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 [folder]"
+  exit 1
+fi
+
+folder="$1"
+
+if [ ! -d "$folder" ]; then
+  echo "'$folder' is not a directory."
+  exit 2
+fi
+
+# Process files recursively
+find "$folder" -type f | while read -r file; do
+  name="${file##*/}" # remove path
+  base="${name%%.*}" # remove extension
+
+  date_touch=""
+
+  # 1️⃣ Unix epoch in milliseconds
+  if [[ "$base" =~ ^[0-9]{10,13}$ ]]; then
+    secs=$(echo "$base / 1000" | bc)
+    date_touch=$(date -r "$secs" +"%Y%m%d%H%M.%S") # macOS format
+
+  # 2️⃣ Human-readable YYYYMMDD_HHMMSS
+  elif [[ "$base" =~ ^[0-9]{8}_[0-9]{6}$ ]]; then
+    date_touch="${base:0:8}${base:9:6}"
+    date_touch="${date_touch:0:12}.${date_touch:12:2}" # macOS touch format
+
+  # 3️⃣ Prefixed timestamp, e.g., PSX_YYYYMMDD_HHMMSS
+  elif [[ "$base" =~ ^[A-Z]+_[0-9]{8}_[0-9]{6}$ ]]; then
+    timestamp="${base#*_}" # remove prefix up to first '_'
+    date_touch="${timestamp:0:8}${timestamp:9:6}"
+    date_touch="${date_touch:0:12}.${date_touch:12:2}" # macOS touch format
+
+  # 4️⃣ IMG-YYYYMMDD-*.jpg (WhatsApp/phone exports)
+  elif [[ "$base" =~ ^IMG-([0-9]{8})-.*$ ]]; then
+    date_part="${BASH_REMATCH[1]}"   # capture YYYYMMDD
+    date_touch="${date_part}0000.00" # midnight
+  fi
+
+  if [ -n "$date_touch" ]; then
+    touch -t "$date_touch" "$file"
+    echo "Updated '$file' to $date_touch"
+  fi
+done

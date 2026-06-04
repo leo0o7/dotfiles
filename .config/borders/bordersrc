@@ -1,0 +1,12 @@
+#!/bin/bash
+
+options=(
+  style=round
+  width=5.0
+  hidpi=on
+  ax_focus=on
+  active_color=0xff5e81ac
+  inactive_color=0xff4c566a # a darker shade of the active color for aesthetic contrast
+)
+
+borders "${options[@]}"

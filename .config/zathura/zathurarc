@@ -1,0 +1,6 @@
+set font 'monospace normal 14'
+set selection-clipboard clipboard
+set guioptions statusbar
+map b adjust_window best-fit
+include catppuccin-mocha
+

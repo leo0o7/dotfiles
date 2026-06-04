@@ -1,0 +1,6 @@
+#!/bin/bash
+
+class_to_run=$1
+shift
+base_package=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.groupId}.${project.artifactId}' --non-recursive exec:exec 2>/dev/null)
+mvn exec:java -Dexec.mainClass="$base_package.$class_to_run" -Dexec.args="$*"

@@ -6,6 +6,8 @@
 *.sqlite
 *.sqlite-*
 node_modules/
+.config/skhd/create-config/dist/
+.config/tmux/plugins/
 
 # Local/session state and secrets
 .npmrc
@@ -17,6 +19,9 @@ node_modules/
 .config/opencode/push-tokens.json
 .config/opencode/tunnel.json
 .config/opencode/opencode.json.backup-*
+.config/opencode/package.json
+.config/opencode/package-lock.json
+.config/opencode/bun.lock
 .config/karabiner/automatic_backups/
 Library/Application Support/lazygit/state.yml
 

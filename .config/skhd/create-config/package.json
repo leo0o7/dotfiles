@@ -1,0 +1,18 @@
+{
+  "name": "create-config",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "generate-config": "tsc && node dist/",
+    "test": "tsc && node dist/ && cat test.txt"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "typescript": "^5.5.3"
+  }
+}
