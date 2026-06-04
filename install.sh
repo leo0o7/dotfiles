@@ -42,17 +42,32 @@ fi
 
 cd "$DOTFILES_DIR"
 
-conflicts=$(stow --target="$TARGET_DIR" --no-folding --simulate . 2>&1 || true)
-if printf '%s\n' "$conflicts" | grep -q 'existing target is neither a link nor a directory'; then
-  echo "$conflicts"
-  echo
-  echo "Stow found conflicts. Back up or move those files, then rerun." >&2
-  exit 1
-fi
+backup_existing_targets() {
+  git ls-files | while IFS= read -r path; do
+    case "$path" in
+      .gitignore|.stow-local-ignore|Brewfile|install.sh|README.md) continue ;;
+    esac
+
+    target=$TARGET_DIR/$path
+    backup=$BACKUP_DIR/$path
+
+    if [ -e "$target" ] && [ ! -L "$target" ]; then
+      if [ "$DRY_RUN" -eq 1 ]; then
+        echo "Would back up: $target -> $backup"
+      else
+        mkdir -p "$(dirname -- "$backup")"
+        mv "$target" "$backup"
+      fi
+    fi
+  done
+}
 
 if [ "$DRY_RUN" -eq 1 ]; then
-  stow --target="$TARGET_DIR" --no-folding --simulate --verbose .
+  backup_existing_targets
+  echo
+  echo "Would run: stow --target='$TARGET_DIR' --no-folding --verbose ."
 else
+  backup_existing_targets
   stow --target="$TARGET_DIR" --no-folding --verbose .
 fi
 
