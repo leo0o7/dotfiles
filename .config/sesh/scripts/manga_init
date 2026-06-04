@@ -1,0 +1,34 @@
+#!/bin/bash
+
+tmux rename-window "overview"
+tmux split-window -h
+tmux send-keys "cd /Users/leo/Library/Application\\ Support/Komga && clear" C-m
+tmux select-pane -t :.+
+tmux send-keys "cd /Users/leo/.config/tachidesk/data/downloads/mangas && neofetch && ls && du -sh ." C-m
+
+tmux new-window
+tmux rename-window "tachidesk"
+
+JAR_PATH="/Users/leo/.config/tachidesk/Suwayomi-Server.jar"
+DATA_DIR="/Users/leo/.config/tachidesk/data"
+
+if [[ ! -f "$JAR_PATH" ]]; then
+  echo "Tachidesk jar not found at $JAR_PATH" >&2
+  exit 1
+fi
+
+tmux send-keys "java -Dsuwayomi.tachidesk.config.server.rootDir=\"$DATA_DIR\" -jar $JAR_PATH" C-m
+
+KOMGA_PID=$(pgrep -a Komga)
+
+if [[ "$KOMGA_PID" -eq "" ]]; then
+  open /Applications/Komga.app/
+fi
+
+tmux select-window -t 1
+tmux send-keys -R \; send-keys Enter
+
+terminal-notifier \
+  -title "Manga Servers" \
+  -message "✅ Tachidesk and Komga servers started.                         ⚙️ Ports: 4567 | 25600" \
+  -sender org.gotson.komga

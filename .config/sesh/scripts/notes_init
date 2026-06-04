@@ -1,0 +1,17 @@
+#!/bin/bash
+tmux rename-window -t 1 "anno-4"
+
+# params:
+# $1 = dir name
+function init_note_window() {
+  window_name=$(echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
+  tmux send-keys -t "$window_name" "z $1" C-m
+  tmux send-keys -t "$window_name" C-a C-l
+  # tmux send-keys -t "$window_name" "echo $1" C-m
+  tmux send-keys -t "$window_name" "nvim" C-m
+}
+tmux new-window -n "anno-3"
+init_note_window "Anno 3"
+
+init_note_window "Anno 4"
+tmux select-window -t 1

@@ -1,0 +1,108 @@
+[default_session]
+startup_command = "v"
+
+# dotfiles
+
+[[session]]
+name = "dotfiles"
+path = "~/.config"
+startup_command = "ls"
+
+[[session]]
+name = "nvim"
+path = "~/.config/nvim"
+
+[[session]]
+name = "zshrc"
+path = "~"
+startup_command = "v .zshrc"
+
+[[session]]
+name = "tmux config"
+path = "~/.config/tmux"
+startup_command = "v tmux.conf"
+
+[[session]]
+name = "sesh"
+path = "~/.config/sesh"
+startup_command = "v sesh.toml"
+
+[[session]]
+name = "wezterm"
+path = "~/.config/wezterm"
+startup_command = "v wezterm.lua"
+
+[[session]]
+name = "yabai"
+path = "~/.config/yabai"
+
+[[session]]
+name = "skhd"
+path = "~/.config/skhd"
+
+# notes 
+
+[[session]]
+name = "notes"
+path = "~/personal/notes"
+# source to run in the same shell (for cds)
+startup_command = "source ~/.config/sesh/scripts/notes_init"
+
+# mangas
+
+[[session]]
+name = "mangas"
+path = "~/"
+# source to run in the same shell (for cds)
+startup_command = "source ~/.config/sesh/scripts/manga_init"
+
+# web 
+
+[[session]]
+name = "nextjs"
+path = "~/projects/nextjs"
+startup_command = "ls"
+
+[[session]]
+name = "web project"
+path = "~/projects/nextjs"
+startup_command = "source ~/.config/sesh/scripts/find_or_create_sess"
+
+# java 
+
+# [[session]]
+# name = "java"
+# path = "~/projects/java"
+# startup_command = "ls"
+
+[[session]]
+name = "java project"
+path = "~/projects/java"
+startup_command = "source ~/.config/sesh/scripts/find_or_create_sess"
+
+[[session]]
+name = "java school"
+path = "~/projects/school/java/"
+startup_command = "source ~/.config/sesh/scripts/find_or_create_sess"
+
+# misc
+
+[[session]]
+name = "ollama"
+path = "~/"
+startup_command = "ollama serve"
+
+[[session]]
+name = "bins"
+path = "~/bin"
+startup_command = "ls"
+
+[[session]]
+name = "home"
+path = "~"
+startup_command = "ls"
+
+[[session]]
+name = "downloads"
+path = "~/Downloads"
+startup_command = "ls"
