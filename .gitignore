@@ -1,0 +1,27 @@
+.DS_Store
+*.bak
+*.backup
+*.backup-*
+*.log
+*.sqlite
+*.sqlite-*
+node_modules/
+
+# Local/session state and secrets
+.npmrc
+.ssh/
+.docker/
+.kaggle/
+.codex/auth.json
+.config/gh/hosts.yml
+.config/opencode/push-tokens.json
+.config/opencode/tunnel.json
+.config/opencode/opencode.json.backup-*
+.config/karabiner/automatic_backups/
+Library/Application Support/lazygit/state.yml
+
+# Excluded ~/bin binaries/vendor tools
+bin/bscpylgtvcommand
+bin/phpactor.phar
+bin/lgtv
+bin/wakeonlan
