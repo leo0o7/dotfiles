@@ -25,7 +25,7 @@ Examples:
 ```text
 .zshrc -> ~/.zshrc
 .config/nvim -> ~/.config/nvim
-Library/Application Support/lazygit/config.yml -> ~/Library/Application Support/lazygit/config.yml
+.config/lazygit/config.yml -> ~/.config/lazygit/config.yml
 ```
 
 ## Secrets

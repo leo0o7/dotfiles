@@ -26,6 +26,8 @@ setopt histignorespace
 setopt share_history # sync history across tmux panes/windows
 setopt hist_verify   # show expanded history before running
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # fixes some stuff
 export LC_ALL=en_US.UTF-8
 

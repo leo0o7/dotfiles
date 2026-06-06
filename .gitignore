@@ -23,7 +23,7 @@ node_modules/
 .config/opencode/package-lock.json
 .config/opencode/bun.lock
 .config/karabiner/automatic_backups/
-Library/Application Support/lazygit/state.yml
+.config/lazygit/state.yml
 
 # Excluded ~/bin binaries/vendor tools
 bin/bscpylgtvcommand
