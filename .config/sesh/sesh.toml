@@ -5,7 +5,7 @@ startup_command = "v"
 
 [[session]]
 name = "dotfiles"
-path = "~/.config"
+path = "~/dotfiles"
 startup_command = "ls"
 
 [[session]]
