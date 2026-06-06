@@ -2,5 +2,6 @@
 ^/\.gitignore$
 ^/\.stow-local-ignore$
 ^/Brewfile$
+^.gitattributes$
 ^/install\.sh$
 ^/README\.md$
