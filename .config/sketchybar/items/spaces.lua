@@ -1,7 +1,6 @@
 local colors = require("colors")
 local icons = require("icons")
 local settings = require("settings")
--- local app_icons = require("helpers.app_icons")
 
 local spaces = {}
 
@@ -122,25 +121,15 @@ local spaces_indicator = sbar.add("item", {
 })
 
 space_window_observer:subscribe("space_windows_change", function(env)
-	local icon_line = ""
-	--[[
-    local no_app = true
-
-    for app, _ in pairs(env.INFO.apps) do
-		no_app = false
-		local lookup = app_icons[app]
-		local icon = ((lookup == nil) and app_icons["default"] or lookup)
-		icon_line = icon_line .. " " .. icon
-	end
-
-	if no_app then
-	    icon_line = " —"
-	end
-    ]]
-	--
+	local idx = env.INFO.space
+	local has_windows = next(env.INFO.apps) ~= nil
 
 	sbar.animate("tanh", 10, function()
-		spaces[env.INFO.space]:set({ label = icon_line })
+		spaces[idx]:set({
+			icon = { string = tostring(idx) },
+			label = "",
+			background = { color = has_windows and colors.bg3 or colors.bg1 },
+		})
 	end)
 end)
 

@@ -21,6 +21,7 @@ return {
 	},
 	bg1 = 0xff24283b, -- Slightly lighter background (TokyoNight's main background)
 	bg2 = 0xff1a1b26, -- Darker background shade for contrast
+	bg3 = 0xff2d3246, -- Subtle highlight for occupied workspaces
 
 	-- black = 0xff10333f, -- Darker background like TokyoNight
 	-- white = 0xffece8d6, -- Soft white-blueish tone
