@@ -31,7 +31,8 @@ local volume_icon = sbar.add("item", "widgets.volume2", {
 		width = 25,
 		align = "left",
 		font = {
-			style = settings.font.style_map["Regular"],
+			family = settings.font.icons,
+			style = "Regular",
 			size = 14.0,
 		},
 	},
@@ -140,7 +141,7 @@ end
 local function make_device_row(id, device_name, is_active, icon_str, click_script)
 	local label_color = is_active and colors.white or colors.with_alpha(colors.white, 0.55)
 	local icon_color = is_active and colors.blue or colors.with_alpha(colors.white, 0.4)
-	local display_name = is_active and (device_name .. "  􀆅") or device_name
+	local display_name = is_active and (device_name .. "  ✓") or device_name
 
 	sbar.add("item", id, {
 		position = "popup." .. volume_bracket.name,

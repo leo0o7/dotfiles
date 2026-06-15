@@ -27,7 +27,7 @@ local wifi_up = sbar.add("item", "widgets.wifi1", {
 	width = 0,
 	icon = {
 		padding_right = 0,
-		font = { style = settings.font.style_map["Bold"], size = 9.0 },
+		font = { family = settings.font.icons, style = "Regular", size = 9.0 },
 		string = icons.wifi.upload,
 	},
 	label = {
@@ -47,7 +47,7 @@ local wifi_down = sbar.add("item", "widgets.wifi2", {
 	padding_left = -5,
 	icon = {
 		padding_right = 0,
-		font = { style = settings.font.style_map["Bold"], size = 9.0 },
+		font = { family = settings.font.icons, style = "Regular", size = 9.0 },
 		string = icons.wifi.download,
 	},
 	label = {
@@ -78,7 +78,7 @@ sbar.add("item", { position = "right", width = settings.group_paddings })
 
 local ssid_item = sbar.add("item", {
 	position = "popup." .. wifi_bracket.name,
-	icon = { font = { style = settings.font.style_map["Bold"] }, string = icons.wifi.router },
+	icon = { font = { family = settings.font.icons, style = "Regular" }, string = icons.wifi.router },
 	width = popup_width,
 	align = "center",
 	label = {
@@ -91,25 +91,25 @@ local ssid_item = sbar.add("item", {
 
 local hostname = sbar.add("item", {
 	position = "popup." .. wifi_bracket.name,
-	icon = { align = "left", string = "Hostname:", width = popup_width / 2 },
+	icon = { align = "left", string = "Hostname:", width = popup_width / 2, font = { family = settings.font.text } },
 	label = { max_chars = 20, string = "—", width = popup_width / 2, align = "right" },
 })
 
 local ip = sbar.add("item", {
 	position = "popup." .. wifi_bracket.name,
-	icon = { align = "left", string = "IP:", width = popup_width / 2 },
+	icon = { align = "left", string = "IP:", width = popup_width / 2, font = { family = settings.font.text } },
 	label = { string = "—", width = popup_width / 2, align = "right" },
 })
 
 local mask = sbar.add("item", {
 	position = "popup." .. wifi_bracket.name,
-	icon = { align = "left", string = "Subnet mask:", width = popup_width / 2 },
+	icon = { align = "left", string = "Subnet mask:", width = popup_width / 2, font = { family = settings.font.text } },
 	label = { string = "—", width = popup_width / 2, align = "right" },
 })
 
 local router_item = sbar.add("item", {
 	position = "popup." .. wifi_bracket.name,
-	icon = { align = "left", string = "Router:", width = popup_width / 2 },
+	icon = { align = "left", string = "Router:", width = popup_width / 2, font = { family = settings.font.text } },
 	label = { string = "—", width = popup_width / 2, align = "right" },
 })
 

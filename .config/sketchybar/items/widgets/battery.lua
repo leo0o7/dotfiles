@@ -21,6 +21,7 @@ local remaining_time = sbar.add("item", {
 		string = "Time remaining:",
 		width = 100,
 		align = "left",
+		font = { family = settings.font.text },
 	},
 	label = {
 		string = "??:??h",

@@ -11,6 +11,7 @@ return {
 	font = {
 		text = "Maple Mono", -- Used for text
 		numbers = "Maple Mono", -- Used for numbers
+		icons = "SF Pro", -- Used for SF Symbols icons
 		style_map = {
 			["Regular"] = "Regular",
 			["Semibold"] = "Medium",

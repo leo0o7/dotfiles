@@ -9,6 +9,7 @@ local cal = sbar.add("item", {
 		color = colors.white,
 		padding_left = 8,
 		font = {
+			family = settings.font.text,
 			style = settings.font.style_map["Black"],
 			size = 12.0,
 		},
