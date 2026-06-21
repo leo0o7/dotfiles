@@ -1,4 +1,6 @@
 return {
+	-- disable neo-tree even if LazyVim defaults try to enable it
+	{ "nvim-neo-tree/neo-tree.nvim", enabled = false },
 	{
 		"barrettruth/canola.nvim",
 		branch = "canola",
