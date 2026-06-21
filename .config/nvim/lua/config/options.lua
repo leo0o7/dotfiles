@@ -1,4 +1,4 @@
-vim.opt.spelllang = "en_us"
+vim.opt.spelllang = "en_us,it"
 vim.opt.spell = true
 vim.g.mapleader = " "
 
