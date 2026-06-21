@@ -1,10 +1,45 @@
 return {
 	-- keep indent guides available via <leader>ug, but off on startup
+	-- Saturn dashboard header
 	{
 		"folke/snacks.nvim",
 		opts = {
 			indent = {
 				enabled = false,
+			},
+			dashboard = {
+				preset = {
+					header = [[
+
+
+
+
+
+
+                                                   
+                                              ___  
+                                           ,o88888 
+                                        ,o8888888' 
+                  ,:o:o:oooo.        ,8O88Pd8888"  
+              ,.::.::o:ooooOoOoO. ,oO8O8Pd888'"    
+            ,.:.::o:ooOoOoOO8O8OOo.8OOPd8O8O"      
+           , ..:.::o:ooOoOOOO8OOOOo.FdO8O8"        
+          , ..:.::o:ooOoOO8O888O8O,COCOO"          
+         , . ..:.::o:ooOoOOOO8OOOOCOCO"            
+          . ..:.::o:ooOoOoOO8O8OCCCC"o             
+             . ..:.::o:ooooOoCoCCC"o:o             
+             . ..:.::o:o:,cooooCo"oo:o:            
+          `   . . ..:.:cocoooo"'o:o:::'            
+          .`   . ..::ccccoc"'o:o:o:::'             
+         :.:.    ,c:cccc"':.:.:.:.:.'              
+       ..:.:"'`::::c:"'..:.:.:.:.:.'               
+     ...:.'.:.::::"'    . . . . .'                 
+    .. . ....:."' `   .  . . ''                    
+  . . . ...."'                                     
+  .. . ."'                                         
+ .                                                 
+                ]],
+				},
 			},
 		},
 	},
@@ -93,67 +128,6 @@ return {
 					return buffer
 				end,
 			})
-		end,
-	},
-	-- dashboard
-	{
-		"nvimdev/dashboard-nvim",
-		dependencies = { "MaximilianLloyd/ascii.nvim", "MunifTanjim/nui.nvim" },
-		opts = function()
-			local ascii = require("ascii")
-
-			-- local logo = table.concat(ascii.get_random_global(), "\n")
-			local logo = table.concat(ascii.art.planets.planets["saturn_plus"], "\n")
-			logo = string.rep("\n", 8) .. logo .. string.rep("\n", 2)
-
-			local opts = {
-				theme = "doom",
-				hide = {
-					-- this is taken care of by lualine
-					-- enabling this messes up the actual laststatus setting after loading a file
-					statusline = false,
-				},
-				config = {
-					header = vim.split(logo, "\n"),
-          -- stylua: ignore
-          center = {
-            { action = 'lua LazyVim.pick()()',                           desc = " Find File",       icon = " ", key = "f" },
-            { action = "ene | startinsert",                              desc = " New File",        icon = " ", key = "n" },
-            { action = 'lua LazyVim.pick("oldfiles")()',                 desc = " Recent Files",    icon = " ", key = "r" },
-            { action = 'lua LazyVim.pick("live_grep")()',                desc = " Find Text",       icon = " ", key = "g" },
-            { action = 'lua LazyVim.pick.config_files()()',              desc = " Config",          icon = " ", key = "c" },
-            { action = 'lua require("persistence").load()',              desc = " Restore Session", icon = " ", key = "s" },
-            { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
-            { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
-            { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
-          },
-					footer = function()
-						local stats = require("lazy").stats()
-						local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-						return {
-							"⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms",
-						}
-					end,
-				},
-			}
-
-			for _, button in ipairs(opts.config.center) do
-				button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-				button.key_format = "  %s"
-			end
-
-			-- close Lazy and re-open when the dashboard is ready
-			if vim.o.filetype == "lazy" then
-				vim.cmd.close()
-				vim.api.nvim_create_autocmd("User", {
-					pattern = "DashboardLoaded",
-					callback = function()
-						require("lazy").show()
-					end,
-				})
-			end
-
-			return opts
 		end,
 	},
 }
