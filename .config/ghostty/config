@@ -1,0 +1,68 @@
+# WezTerm parity config.
+
+# Font
+font-family = Maple Mono
+font-style = Regular
+font-size = 15
+
+# Window
+macos-titlebar-style = hidden
+macos-window-buttons = hidden
+window-padding-x = 5,0
+window-padding-y = 5,0
+window-padding-balance = false
+window-padding-color = extend
+background-opacity = 1
+
+# Terminal
+term = xterm-kitty
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+
+# Custom shaders (cursor warp trail)
+custom-shader = shaders/cursor_warp.glsl
+# custom-shader = shaders/ripple_cursor.glsl
+custom-shader-animation = always
+
+# Clipboard / OSC 52
+clipboard-read = ask
+clipboard-write = allow
+
+# macOS Option key behavior. Matches WezTerm's split behavior:
+# left Option produces composed characters, right Option acts as Alt.
+macos-option-as-alt = right
+
+# WezTerm tmux-mode bindings, hardwired because Ghostty has no foreground
+# process detection like WezTerm's Lua API.
+keybind = cmd+k=text:\x01\x0c
+keybind = cmd+t=text:\x01c
+keybind = cmd+w=text:\x01x
+keybind = cmd+r=text:source ~/.zshrc\r
+keybind = ctrl+BracketLeft=esc:
+
+# Rose Pine Moon, matching the WezTerm plugin palette.
+background = #232136
+foreground = #e0def4
+cursor-color = #e0def4
+cursor-text = #232136
+selection-background = #44415a
+selection-foreground = #e0def4
+
+palette = 0=#393552
+palette = 1=#eb6f92
+palette = 2=#3e8fb0
+palette = 3=#f6c177
+palette = 4=#9ccfd8
+palette = 5=#c4a7e7
+palette = 6=#ea9a97
+palette = 7=#e0def4
+palette = 8=#6e6a86
+palette = 9=#eb6f92
+palette = 10=#3e8fb0
+palette = 11=#f6c177
+palette = 12=#9ccfd8
+palette = 13=#c4a7e7
+palette = 14=#ea9a97
+palette = 15=#e0def4
