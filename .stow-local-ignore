@@ -1,7 +1,10 @@
 ^/\.git$
 ^/\.gitignore$
 ^/\.stow-local-ignore$
+^/\.DS_Store$
 ^/Brewfile$
 ^.gitattributes$
 ^/install\.sh$
 ^/README\.md$
+^\.config/spicetify/Themes/
+^\.config/spicetify/CustomApps/marketplace/
