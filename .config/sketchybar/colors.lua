@@ -1,71 +1,26 @@
 return {
-	black = 0xff1a1b26, -- Darker background like TokyoNight
-	white = 0xffc0caf5, -- Soft white-blueish tone
-	red = 0xfff7768e, -- TokyoNight red
-	green = 0xff9ece6a, -- TokyoNight green
-	blue = 0xff7aa2f7, -- TokyoNight blue
-	yellow = 0xffe0af68, -- TokyoNight yellow
-	orange = 0xffff9e64, -- TokyoNight orange
-	magenta = 0xffbb9af7, -- TokyoNight magenta
-	grey = 0xff565f89, -- TokyoNight grey
+	black = 0xff232136, -- Base
+	white = 0xffe0def4, -- Text
+	red = 0xffeb6f92, -- Love
+	green = 0xff3e8fb0, -- Pine
+	blue = 0xff9ccfd8, -- Foam
+	yellow = 0xfff6c177, -- Gold
+	orange = 0xffea9a97, -- Rose
+	magenta = 0xffc4a7e7, -- Iris
+	grey = 0xff6e6a86, -- Muted
 	transparent = 0x00000000,
 
 	bar = {
-		-- bg = 0xff1a1b26, -- Darker TokyoNight background for the bar
-		bg = 0xff181826, -- Darker TokyoNight background for the bar
-		border = 0xff3b4261, -- Darker border matching TokyoNight theme
+		bg = 0xff171523, -- Darkened Base (~65% brightness)
+		border = 0xff44415a, -- Highlight Med
 	},
 	popup = {
-		bg = 0xff1a1b26, -- Popup background
-		border = 0xff565f89, -- Popup border matching the TokyoNight grey
+		bg = 0xff2a273f, -- Surface
+		border = 0xff6e6a86, -- Muted
 	},
-	bg1 = 0xff24283b, -- Slightly lighter background (TokyoNight's main background)
-	bg2 = 0xff1a1b26, -- Darker background shade for contrast
-	bg3 = 0xff2d3246, -- Subtle highlight for occupied workspaces
-
-	-- black = 0xff10333f, -- Darker background like TokyoNight
-	-- white = 0xffece8d6, -- Soft white-blueish tone
-	-- red = 0xffca4238, -- TokyoNight red
-	-- green = 0xff88982e, -- TokyoNight green
-	-- blue = 0xff4689cc, -- TokyoNight blue
-	-- yellow = 0xffae8a2d, -- TokyoNight yellow
-	-- orange = 0xffff9e64, -- TokyoNight orange
-	-- magenta = 0xffc24380, -- TokyoNight magenta
-	-- grey = 0xff869395, -- TokyoNight grey
-	-- transparent = 0x00000000,
-	--
-	-- bar = {
-	-- 	bg = 0xff00141a, -- Darker TokyoNight background for the bar
-	-- 	border = 0xff10333f, -- Darker border matching TokyoNight theme
-	-- },
-	-- popup = {
-	-- 	bg = 0xff0b2732, -- Popup background
-	-- 	border = 0xff10333f, -- Popup border matching the TokyoNight grey
-	-- },
-	-- bg1 = 0xff10333f, -- Slightly lighter background (TokyoNight's main background)
-	-- bg2 = 0xff0b2732, -- Darker background shade for contrast
-
-	-- black = 0xff282828,
-	-- white = 0xffebdbb2,
-	-- red = 0xffcc241d,
-	-- green = 0xff98971a,
-	-- blue = 0xff458588,
-	-- yellow = 0xffd79921,
-	-- orange = 0xffd65d0e,
-	-- magenta = 0xffb16286,
-	-- grey = 0xffa89984,
-	-- transparent = 0x00000000,
-	--
-	-- bar = {
-	-- 	bg = 0xff1d2021,
-	-- 	border = 0xff1d2021,
-	-- },
-	-- popup = {
-	-- 	bg = 0xff32302f,
-	-- 	border = 0xff7c6f64,
-	-- },
-	-- bg1 = 0xff282828,
-	-- bg2 = 0xff1d2021,
+	bg1 = 0xff252339, -- ~40% toward Surface (inactive spaces)
+	bg2 = 0xff232136, -- Base
+	bg3 = 0xff302c45, -- ~40% toward Overlay (occupied spaces)
 
 	with_alpha = function(color, alpha)
 		if alpha > 1.0 or alpha < 0.0 then
