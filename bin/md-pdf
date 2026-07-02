@@ -53,5 +53,5 @@ pandoc "$INPUT" \
   -o "$OUTPUT" \
   --from markdown \
   --template="$TEMPLATE" \
-  --listings \
+  --syntax-highlighting=idiomatic \
   --pdf-engine=xelatex
